@@ -2,11 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-	<IsRoslynComponent>true</IsRoslynComponent>
-	<LangVersion>11.0</LangVersion>
+	  <IsRoslynComponent>true</IsRoslynComponent>
+    <PackageId>Gohopo.BlazorBindGenerator</PackageId>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Gohopo.GitVersion" Version="0.2.3" />
     <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.4-beta1.22362.3">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

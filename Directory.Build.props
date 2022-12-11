@@ -1,0 +1,7 @@
+<Project>
+  <PropertyGroup>
+    <LangVersion>latest</LangVersion>
+    <Authors>gohopo</Authors>
+    <NeutralLanguage>zh-cn</NeutralLanguage>
+  </PropertyGroup>
+</Project>

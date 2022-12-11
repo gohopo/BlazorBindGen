@@ -44,7 +44,12 @@ internal class JCallback
         
         //Get each argument from Arg Array
         for (var i = 0; i < argLength; i++)
+        {
+          if (BindGen.IsWasm)
             arr[i] = ptr.PropRef($"{i}");
+          else
+            arr[i] = await ptr.PropRefAsync($"{i}");
+        }
         Executor.Invoke(arr);
     }
     /// <summary>
