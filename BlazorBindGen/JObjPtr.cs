@@ -67,7 +67,7 @@ public class JObjPtr : IEquatable<JObjPtr?>
     public async ValueTask<T> PropValAsync<T>(string propertyName)
     {
         if (IsWasm)
-            return await Module.InvokeAsync<T>("PropVal", propertyName, Hash);
+            return await ValueTask.FromResult(Module.Invoke<T>("PropVal", propertyName, Hash));
         else
             return await GeneralizedModule.InvokeAsync<T>("PropVal", propertyName, Hash);
     }
@@ -246,7 +246,7 @@ public class JObjPtr : IEquatable<JObjPtr?>
         var args = GetParamList(param);
         T res;
         if (IsWasm)
-            res = await Module.InvokeAsync<T>("Func", funcName, args.AsSpan()[..param.Length].ToArray(), Hash);
+            res = Module.Invoke<T>("Func", funcName, args.AsSpan()[..param.Length].ToArray(), Hash);
         else
             res = await GeneralizedModule.InvokeAsync<T>("Func", funcName, args.AsSpan()[..param.Length].ToArray(), Hash);
 
@@ -284,7 +284,7 @@ public class JObjPtr : IEquatable<JObjPtr?>
         JObjPtr j = new();
         var args = GetParamList(param);
         if (IsWasm)
-            await Module.InvokeVoidAsync("FuncRef", funcName, args.AsSpan()[..param.Length].ToArray(), j.Hash, Hash);
+            Module.InvokeVoid("FuncRef", funcName, args.AsSpan()[..param.Length].ToArray(), j.Hash, Hash);
         else
             await GeneralizedModule.InvokeVoidAsync("FuncRef", funcName, args.AsSpan()[..param.Length].ToArray(), j.Hash, Hash);
         ParamPool.Return(args);
@@ -317,7 +317,7 @@ public class JObjPtr : IEquatable<JObjPtr?>
     {
         var args = GetParamList(param);
         if (IsWasm)
-            await Module.InvokeVoidAsync("FuncVoid", funcName, args.AsSpan()[..param.Length].ToArray(), Hash);
+            Module.InvokeVoid("FuncVoid", funcName, args.AsSpan()[..param.Length].ToArray(), Hash);
         else
             await GeneralizedModule.InvokeVoidAsync("FuncVoid", funcName, args.AsSpan()[..param.Length].ToArray(), Hash);
         ParamPool.Return(args);
@@ -465,7 +465,7 @@ public class JObjPtr : IEquatable<JObjPtr?>
         JObjPtr ptr = new();
         var args = GetParamList(param);
         if (IsWasm)
-            await Module.InvokeVoidAsync("Construct", className, args.AsSpan()[..param.Length].ToArray(), ptr.Hash, Hash);
+            Module.InvokeVoid("Construct", className, args.AsSpan()[..param.Length].ToArray(), ptr.Hash, Hash);
         else
             await GeneralizedModule.InvokeVoidAsync("Construct", className, args.AsSpan()[..param.Length].ToArray(), ptr.Hash, Hash);
 

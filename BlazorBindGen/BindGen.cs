@@ -56,12 +56,12 @@ namespace BlazorBindGen
             {
                 Runtime = jsRuntime as IJSInProcessRuntime;
                 Module=await Runtime!.InvokeAsync<IJSUnmarshalledObjectReference>(
-                   "import", "./_content/BlazorBindGen/BlazorBindGen.js");
+                   "import", "./_content/Gohopo.BlazorBindGen/BlazorBindGen.js");
             }
             else
             {
                 GeneralizedModule = await jsRuntime.InvokeAsync<IJSObjectReference>(
-                "import", "./_content/BlazorBindGen/BlazorBindGen.js");
+                "import", "./_content/Gohopo.BlazorBindGen/BlazorBindGen.js");
 
             }
             //Create DotNet Object to handle callbacks from JS and Also create a window object
