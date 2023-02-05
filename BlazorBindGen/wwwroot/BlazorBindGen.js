@@ -140,3 +140,7 @@ export function logPtr( h)
 {
     console.log(props[h]);
 }
+export function log()
+{
+    console.log(props);
+}

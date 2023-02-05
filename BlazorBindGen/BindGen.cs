@@ -177,5 +177,23 @@ namespace BlazorBindGen
             return obj;
         }
 
+        /// <summary>
+        /// console.log props
+        /// </summary>
+        /// <returns></returns>
+        public static void Log()
+        {
+          if (IsWasm)
+            Module.InvokeVoid("log");
+          else
+            PlatformUnsupportedException.Throw();
+        }
+        public static async Task LogAsync()
+        {
+          if (IsWasm)
+            await Module.InvokeVoidAsync("log");
+          else
+            await GeneralizedModule.InvokeVoidAsync("log");
+        }
     }
 }
